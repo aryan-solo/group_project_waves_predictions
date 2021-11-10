@@ -8,10 +8,12 @@ from colorama import Fore, Back, Style
 from colorama import init
 from termcolor import colored
 from datetime import datetime,date,time
-import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-
+from helper import *
+import matplotlib
+#matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 data_dir = "./data"
 all_csv_files = []
@@ -87,6 +89,8 @@ def load_data(station,csv_like):
         print(colored(f"starting for station {one_group[0]}", 'green', 'on_red'))
         df = generate_time_series(one_group[1])
         df = impute_missing_data(df,method = "time")
+        do_train_test_if_model_does_not_exit(df,one_group[0])
+
 
 if __name__ == "__main__":
 
